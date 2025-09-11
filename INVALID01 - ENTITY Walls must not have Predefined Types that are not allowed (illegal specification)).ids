@@ -1,0 +1,37 @@
+<ids:ids xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.buildingsmart.org/IDS http://standards.buildingsmart.org/IDS/1.0/ids.xsd" xmlns:ids="http://standards.buildingsmart.org/IDS">
+  <!--edited with usBIM.IDSeditor 2.3.18.0 (http://www.accasoftware.com)-->
+  <ids:info>
+    <ids:title>IDS Bingo Berlin</ids:title>
+    <ids:copyright>Arons en Gelauff architecten / BIMvoice</ids:copyright>
+    <ids:version>1</ids:version>
+    <ids:description>This IDS contains working specifications that fail the audit.</ids:description>
+    <ids:author>menno@aronsengelauff.nl</ids:author>
+    <ids:date>2025-09-24</ids:date>
+    <ids:purpose>IDS written for 'ILSOenE_PoC-model.ifc' to test IDS tools for creating and validating specifications.</ids:purpose>
+    <ids:milestone>Technical Review</ids:milestone>
+  </ids:info>
+  <ids:specifications>
+    <ids:specification ifcVersion="IFC4X3_ADD2" name="ENTITY: Walls must not have Predefined Types that are not allowed (illegal specification))" identifier="INVALID01" description="These are the Predefined Types. Be aware of not allowed types.&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcWallTypeEnum.htm" instructions="Find Walls and check for all of the Predefined Types that are not allowed in the Schema.&#xA;Use the prohibited cardinality: minOccurs=&quot;0&quot; maxOccurs=&quot;0&quot;.&#xA;IDS documentation reads: requirements are ignored in the verification of models for the prohibited cardinality. This is not really well implemented in most tools yet? Tools usually understand this method and will read the requierements anyway.">
+      <ids:applicability minOccurs="0" maxOccurs="0">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:entity instructions="Do not allow for POLYGONAL and STANDARD as they are deprecated in the current Schema.">
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+          <ids:predefinedType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="POLYGONAL" />
+              <xs:enumeration value="STANDARD" />
+            </xs:restriction>
+          </ids:predefinedType>
+        </ids:entity>
+      </ids:requirements>
+    </ids:specification>
+  </ids:specifications>
+</ids:ids>

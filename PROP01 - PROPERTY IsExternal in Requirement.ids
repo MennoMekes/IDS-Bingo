@@ -1,0 +1,60 @@
+<ids:ids xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.buildingsmart.org/IDS http://standards.buildingsmart.org/IDS/1.0/ids.xsd" xmlns:ids="http://standards.buildingsmart.org/IDS">
+  <!--edited with usBIM.IDSeditor 2.3.18.0 (http://www.accasoftware.com)-->
+  <ids:info>
+    <ids:title>IDS Bingo Berlin</ids:title>
+    <ids:copyright>Arons en Gelauff architecten / BIMvoice</ids:copyright>
+    <ids:version>1</ids:version>
+    <ids:description>This IDS contains specifications for every facet. Every facet has specifications that are simple to verify basic checkers as well as specifications containing regular expressions.
+The results can be checked on the Bingo scorecard found here: ....</ids:description>
+    <ids:author>menno@aronsengelauff.nl</ids:author>
+    <ids:date>2025-09-24</ids:date>
+    <ids:purpose>IDS written for 'ILSOenE_PoC-model.ifc' to test IDS tools for creating and validating specifications.</ids:purpose>
+    <ids:milestone>Technical Review</ids:milestone>
+  </ids:info>
+  <ids:specifications>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="PROPERTY: IsExternal in Requirement" identifier="PROP01" description="https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/property/IsExternal.htm" instructions="Find out if all entities that have IsExternal in their Common Psets actually have this Property defined.">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="IFCWALL" />
+              <xs:enumeration value="IFCSLAB" />
+              <xs:enumeration value="IFCRAILING" />
+              <xs:enumeration value="IFCCOVERING" />
+              <xs:enumeration value="IFCROOF" />
+              <xs:enumeration value="IFCSPATIALZONE" />
+              <xs:enumeration value="IFCSTAIR" />
+              <xs:enumeration value="IFCPLATE" />
+              <xs:enumeration value="IFCBEAM" />
+              <xs:enumeration value="IFCCHIMNEY" />
+              <xs:enumeration value="IFCRAMP" />
+              <xs:enumeration value="IFCJUNCTIONBOX" />
+              <xs:enumeration value="IFCCOLUMN" />
+              <xs:enumeration value="IFCMEMBER" />
+              <xs:enumeration value="IFCSPACE" />
+              <xs:enumeration value="IFCBUILDINGELEMENTPROXY" />
+              <xs:enumeration value="IFCDOOR" />
+              <xs:enumeration value="IFCWINDOW" />
+              <xs:enumeration value="IFCSHADINGDEVICE" />
+              <xs:enumeration value="IFCSIGN" />
+              <xs:enumeration value="IFCCURTAINWALL" />
+              <xs:enumeration value="IFCSPACETYPE" />
+            </xs:restriction>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property dataType="IFCBOOLEAN" cardinality="required">
+          <ids:propertySet>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="Pset_.*Common" />
+            </xs:restriction>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>IsExternal</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+  </ids:specifications>
+</ids:ids>

@@ -1,0 +1,43 @@
+<ids:ids xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.buildingsmart.org/IDS http://standards.buildingsmart.org/IDS/1.0/ids.xsd" xmlns:ids="http://standards.buildingsmart.org/IDS">
+  <!--edited with usBIM.IDSeditor 2.3.18.0 (http://www.accasoftware.com)-->
+  <ids:info>
+    <ids:title>IDS Bingo Berlin</ids:title>
+    <ids:copyright>Arons en Gelauff architecten / BIMvoice</ids:copyright>
+    <ids:version>1</ids:version>
+    <ids:description>This IDS contains specifications for every facet. Every facet has specifications that are simple to verify basic checkers as well as specifications containing regular expressions.
+The results can be checked on the Bingo scorecard found here: ....</ids:description>
+    <ids:author>menno@aronsengelauff.nl</ids:author>
+    <ids:date>2025-09-24</ids:date>
+    <ids:purpose>IDS written for 'ILSOenE_PoC-model.ifc' to test IDS tools for creating and validating specifications.</ids:purpose>
+    <ids:milestone>Technical Review</ids:milestone>
+  </ids:info>
+  <ids:specifications>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="MATERIAL: specific element must have a specific name" identifier="MAT01" description="Validating materials is usually never done like this. But if a tool does not support RegEx, this is a simple test." instructions="Find walls with name '21_metselwerk type 1_100', the Material should be steenachtig_baksteen_steen_roodroze">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+          <ids:predefinedType>
+            <ids:simpleValue>SOLIDWALL</ids:simpleValue>
+          </ids:predefinedType>
+        </ids:entity>
+        <ids:attribute>
+          <ids:name>
+            <ids:simpleValue>Name</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <ids:simpleValue>21_metselwerk type 1_100</ids:simpleValue>
+          </ids:value>
+        </ids:attribute>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:material uri="https://identifier.buildingsmart.org/uri/nkt/naakt/2.4/class/steenachtig_baksteen_steen" cardinality="required">
+          <ids:value>
+            <ids:simpleValue>steenachtig_baksteen_steen_roodroze</ids:simpleValue>
+          </ids:value>
+        </ids:material>
+      </ids:requirements>
+    </ids:specification>
+  </ids:specifications>
+</ids:ids>

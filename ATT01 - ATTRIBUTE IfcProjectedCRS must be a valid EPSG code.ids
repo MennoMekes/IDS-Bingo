@@ -1,0 +1,35 @@
+<ids:ids xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.buildingsmart.org/IDS http://standards.buildingsmart.org/IDS/1.0/ids.xsd" xmlns:ids="http://standards.buildingsmart.org/IDS">
+  <!--edited with usBIM.IDSeditor 2.3.18.0 (http://www.accasoftware.com)-->
+  <ids:info>
+    <ids:title>IDS Bingo Berlin</ids:title>
+    <ids:copyright>Arons en Gelauff architecten / BIMvoice</ids:copyright>
+    <ids:version>1</ids:version>
+    <ids:description>This IDS contains specifications for every facet. Every facet has specifications that are simple to verify basic checkers as well as specifications containing regular expressions.
+The results can be checked on the Bingo scorecard found here: ....</ids:description>
+    <ids:author>menno@aronsengelauff.nl</ids:author>
+    <ids:date>2025-09-24</ids:date>
+    <ids:purpose>IDS written for 'ILSOenE_PoC-model.ifc' to test IDS tools for creating and validating specifications.</ids:purpose>
+    <ids:milestone>Technical Review</ids:milestone>
+  </ids:info>
+  <ids:specifications>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ATTRIBUTE: IfcProjectedCRS must be a valid EPSG code" identifier="ATT01" description="Checks if the model is placed onto the correct coordinate system:&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcProjectedCRS.htm" instructions="One entity can only have one value.">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCPROJECTEDCRS</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:attribute cardinality="required" instructions="Choose the EPSG-code for your model here: https://epsg.io/28992&#xA;Change it to something else to see if the specification works.">
+          <ids:name>
+            <ids:simpleValue>Name</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <ids:simpleValue>EPSG:28992</ids:simpleValue>
+          </ids:value>
+        </ids:attribute>
+      </ids:requirements>
+    </ids:specification>
+  </ids:specifications>
+</ids:ids>

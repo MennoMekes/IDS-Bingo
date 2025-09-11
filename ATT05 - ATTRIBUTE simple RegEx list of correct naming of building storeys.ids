@@ -1,0 +1,614 @@
+<ids:ids xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.buildingsmart.org/IDS http://standards.buildingsmart.org/IDS/1.0/ids.xsd" xmlns:ids="http://standards.buildingsmart.org/IDS">
+  <!--edited with usBIM.IDSeditor 2.3.18.0 (http://www.accasoftware.com)-->
+  <ids:info>
+    <ids:title>IDS Bingo Berlin</ids:title>
+    <ids:copyright>Arons en Gelauff architecten / BIMvoice</ids:copyright>
+    <ids:version>1</ids:version>
+    <ids:description>This IDS contains specifications for every facet. Every facet has specifications that are simple to verify basic checkers as well as specifications containing regular expressions.
+The results can be checked on the Bingo scorecard found here: ....</ids:description>
+    <ids:author>menno@aronsengelauff.nl</ids:author>
+    <ids:date>2025-09-24</ids:date>
+    <ids:purpose>IDS written for 'ILSOenE_PoC-model.ifc' to test IDS tools for creating and validating specifications.</ids:purpose>
+    <ids:milestone>Technical Review</ids:milestone>
+  </ids:info>
+  <ids:specifications>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ATTRIBUTE: IfcProjectedCRS must be a valid EPSG code" identifier="ATT01" description="Checks if the model is placed onto the correct coordinate system:&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcProjectedCRS.htm" instructions="One entity can only have one value.">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCPROJECTEDCRS</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:attribute cardinality="required" instructions="Choose the EPSG-code for your model here: https://epsg.io/28992&#xA;Change it to something else to see if the specification works.">
+          <ids:name>
+            <ids:simpleValue>Name</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <ids:simpleValue>EPSG:28992</ids:simpleValue>
+          </ids:value>
+        </ids:attribute>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ATTRIBUTE: Attributes in IfcMapConversion must be present" identifier="ATT02" description="Checks if the model is placed on coordinates&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcMapConversion.htm" instructions="Three Attributes must be present in one entity">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCMAPCONVERSION</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:attribute cardinality="required" instructions="Attribute must exist">
+          <ids:name>
+            <ids:simpleValue>Eastings</ids:simpleValue>
+          </ids:name>
+        </ids:attribute>
+        <ids:attribute cardinality="required" instructions="Attribute must exist">
+          <ids:name>
+            <ids:simpleValue>Northings</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <ids:simpleValue>422691.5309</ids:simpleValue>
+          </ids:value>
+        </ids:attribute>
+        <ids:attribute cardinality="required" instructions="Attribute must exist">
+          <ids:name>
+            <ids:simpleValue>OrthogonalHeight</ids:simpleValue>
+          </ids:name>
+        </ids:attribute>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ATTRIBUTE: Attributes in IfcMapConversion cannot be 0" identifier="ATT03" description="Checks if the model is placed on coordinates&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcMapConversion.htm" instructions="Three Attributes must be present in one entity">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCMAPCONVERSION</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:attribute cardinality="required" instructions="Attribute must be greater than 0&#xA;(the coordinates must be set but cannot be at 0,0,0 for the model to be at the correct location)&#xA;(This test is less than 0 in order to generate a mistake)">
+          <ids:name>
+            <ids:simpleValue>Eastings</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <xs:restriction base="xs:double">
+              <xs:maxExclusive value="0" />
+            </xs:restriction>
+          </ids:value>
+        </ids:attribute>
+        <ids:attribute cardinality="required" instructions="Attribute must be greater than 0&#xA;(the coordinates must be set but cannot be at 0,0,0 for the model to be at the correct location)">
+          <ids:name>
+            <ids:simpleValue>Northings</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <xs:restriction base="xs:double">
+              <xs:minExclusive value="0" />
+            </xs:restriction>
+          </ids:value>
+        </ids:attribute>
+        <ids:attribute cardinality="required" instructions="Attribute must be greater than or equal to 1,25m&#xA;(Actually it should just be 1.25m but this is to test the different bounds.)">
+          <ids:name>
+            <ids:simpleValue>OrthogonalHeight</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <xs:restriction base="xs:double">
+              <xs:minInclusive value="1.25" />
+            </xs:restriction>
+          </ids:value>
+        </ids:attribute>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="ATTRIBUTE: list of correct naming of building storeys" identifier="ATT04" description="validates the naming of building storeys in a list&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcBuildingStorey.htm" instructions="Add a list of names in the Requirements">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCBUILDINGSTOREY</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:attribute cardinality="required">
+          <ids:name>
+            <ids:simpleValue>Name</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="00 ground floor" />
+              <xs:enumeration value="01 first floor" />
+              <xs:enumeration value="02 second floor" />
+            </xs:restriction>
+          </ids:value>
+        </ids:attribute>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="ATTRIBUTE: simple RegEx list of correct naming of building storeys" identifier="ATT05" description="validates the naming of building storeys in a list&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcBuildingStorey.htm" instructions="Add a list of names in the Requirements by use of regular expression">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCBUILDINGSTOREY</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:attribute cardinality="required">
+          <ids:name>
+            <ids:simpleValue>Name</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="00 ground floor|01 first floor|02 second floor" />
+            </xs:restriction>
+          </ids:value>
+        </ids:attribute>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="ATTRIBUTE: complex RegEx of correct naming of building storeys" identifier="ATT06" description="validates the naming of building storeys in a list&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcBuildingStorey.htm" instructions="Add a list of names in the Requirements by use of regular expression">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCBUILDINGSTOREY</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:attribute cardinality="required">
+          <ids:name>
+            <ids:simpleValue>Name</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[0-2][0-2].*floor" />
+            </xs:restriction>
+          </ids:value>
+        </ids:attribute>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ENTITY: Walls must have allowed Predefined Types" identifier="ENT01" description="These are the Predefined Types. Be aware of not allowed types.&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcWallTypeEnum.htm" instructions="Find Walls and check for all of the Predefined Types that are allowed in the Schema.&#xA;Use the required cardinality: minOccurs=&quot;1&quot; maxOccurs=&quot;unbounded&quot;.">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:entity instructions="Do not allow for POLYGONAL and STANDARD as they are deprecated in the current Schema.">
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+          <ids:predefinedType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="ELEMENTEDWALL" />
+              <xs:enumeration value="MOVABLE" />
+              <xs:enumeration value="PARAPET" />
+              <xs:enumeration value="PARTITIONING" />
+              <xs:enumeration value="PLUMBINGWALL" />
+              <xs:enumeration value="RETAININGWALL" />
+              <xs:enumeration value="SHEAR" />
+              <xs:enumeration value="SOLIDWALL" />
+              <xs:enumeration value="WAVEWALL" />
+              <xs:enumeration value="USERDEFINED" />
+              <xs:enumeration value="NOTDEFINED" />
+            </xs:restriction>
+          </ids:predefinedType>
+        </ids:entity>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ENTITY: Walls may have allowed Predefined Types" identifier="ENT02" description="These are the Predefined Types. Be aware of not allowed types.&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcWallTypeEnum.htm" instructions="Find Walls and check for all of the Predefined Types that are allowed in the Schema.&#xA;Use the optional cardinality: minOccurs=&quot;0,&quot;maxOccurs=&quot;unbounded&quot;.">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:entity instructions="Do not allow for POLYGONAL and STANDARD as they are deprecated in the current Schema.">
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+          <ids:predefinedType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="ELEMENTEDWALL" />
+              <xs:enumeration value="MOVABLE" />
+              <xs:enumeration value="PARAPET" />
+              <xs:enumeration value="PARTITIONING" />
+              <xs:enumeration value="PLUMBINGWALL" />
+              <xs:enumeration value="RETAININGWALL" />
+              <xs:enumeration value="SHEAR" />
+              <xs:enumeration value="SOLIDWALL" />
+              <xs:enumeration value="WAVEWALL" />
+              <xs:enumeration value="USERDEFINED" />
+              <xs:enumeration value="NOTDEFINED" />
+            </xs:restriction>
+          </ids:predefinedType>
+        </ids:entity>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ENTITY: Walls mut not have Predefined Types that are not allowed in Applicability only" identifier="ENT03" description="These are the Predefined Types. Be aware of not allowed types.&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcWallTypeEnum.htm" instructions="Find Walls and check for all of the Predefined Types that are not allowed in the Schema.&#xA;Use the prohibited cardinality: minOccurs=&quot;0&quot; maxOccurs=&quot;0&quot;.&#xA;IDS documentation reads: requirements are ignored in the verification of models for the prohibited cardinality.">
+      <ids:applicability minOccurs="0" maxOccurs="0">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+          <ids:predefinedType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="POLYGONAL" />
+              <xs:enumeration value="STANDARD" />
+            </xs:restriction>
+          </ids:predefinedType>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements />
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="CLASSIFICATION: walls must have CCI classification" identifier="CL01" description="Checks if the classification is present.&#xA;This specification has an Entity as applicability." instructions="Find all walls, they need to have a CCI classification">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:classification uri="https://identifier.buildingsmart.org/uri/molio/cciconstruction/1.0/class/L-AD" cardinality="required">
+          <ids:system>
+            <ids:simpleValue>CCI Construction</ids:simpleValue>
+          </ids:system>
+        </ids:classification>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="CLASSIFICATION: concrete walls must have CCI classification" identifier="CL02" description="Checks if the classification is correct. &#xA;This specification has an attribue as applicability as well as an Entity." instructions="Find all elements containing the word 'beton' (Dutch for concrete) in the Attribute 'Name', they need to have a CCI classification LA-D. ">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+        <ids:attribute>
+          <ids:name>
+            <ids:simpleValue>Name</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*beton.*" />
+            </xs:restriction>
+          </ids:value>
+        </ids:attribute>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:classification uri="https://identifier.buildingsmart.org/uri/molio/cciconstruction/1.0/class/L-AD" cardinality="required">
+          <ids:value>
+            <ids:simpleValue>L-AD</ids:simpleValue>
+          </ids:value>
+          <ids:system>
+            <ids:simpleValue>CCI Construction</ids:simpleValue>
+          </ids:system>
+        </ids:classification>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="CLASSIFICATION: CCI classification L-Ad must be a wall." identifier="CL03" description="Reversed specification that wlil find a Slab that has a Wall-code." instructions="Find all elements with classification L-AD, they must be walls.">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:classification>
+          <ids:value>
+            <ids:simpleValue>L-AD</ids:simpleValue>
+          </ids:value>
+          <ids:system>
+            <ids:simpleValue>CCI Construction</ids:simpleValue>
+          </ids:system>
+        </ids:classification>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="PROPERTY: IsExternal in Requirement" identifier="PROP01" description="https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/property/IsExternal.htm" instructions="Find out if all entities that have IsExternal in their Common Psets actually have this Property defined.">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="IFCWALL" />
+              <xs:enumeration value="IFCSLAB" />
+              <xs:enumeration value="IFCRAILING" />
+              <xs:enumeration value="IFCCOVERING" />
+              <xs:enumeration value="IFCROOF" />
+              <xs:enumeration value="IFCSPATIALZONE" />
+              <xs:enumeration value="IFCSTAIR" />
+              <xs:enumeration value="IFCPLATE" />
+              <xs:enumeration value="IFCBEAM" />
+              <xs:enumeration value="IFCCHIMNEY" />
+              <xs:enumeration value="IFCRAMP" />
+              <xs:enumeration value="IFCJUNCTIONBOX" />
+              <xs:enumeration value="IFCCOLUMN" />
+              <xs:enumeration value="IFCMEMBER" />
+              <xs:enumeration value="IFCSPACE" />
+              <xs:enumeration value="IFCBUILDINGELEMENTPROXY" />
+              <xs:enumeration value="IFCDOOR" />
+              <xs:enumeration value="IFCWINDOW" />
+              <xs:enumeration value="IFCSHADINGDEVICE" />
+              <xs:enumeration value="IFCSIGN" />
+              <xs:enumeration value="IFCCURTAINWALL" />
+              <xs:enumeration value="IFCSPACETYPE" />
+            </xs:restriction>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property dataType="IFCBOOLEAN" cardinality="required">
+          <ids:propertySet>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="Pset_.*Common" />
+            </xs:restriction>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>IsExternal</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="PROPERTY: IsExternal in Applicability" identifier="PROP02" description="https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/property/IsExternal.htm" instructions="IsExternal in Pset_WallCommon should be IfcWall">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:property dataType="IFCBOOLEAN">
+          <ids:propertySet>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="Pset_WallCommon" />
+            </xs:restriction>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>IsExternal</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:entity instructions="For this specification, IfcWallType has been left out to generate some failures.">
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="PROPERTY: External Railing should have IsExternal = True" identifier="PROP03" description="https://data.ketenstandaard.nl/publications/nlsfb/2021/781eb5a2-6424-483d-b050-73a7bbff5775" instructions="Find the Railing with NL-SfB ClassificationCode: 34.12: balustrades, handrails; balustrades, outer balustrades'. Outer balustrades should have the property IsExternal = True.">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCRAILING</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+        <ids:classification>
+          <ids:value>
+            <ids:simpleValue>34.12</ids:simpleValue>
+          </ids:value>
+          <ids:system>
+            <ids:simpleValue>NL-SfB Tabel 1</ids:simpleValue>
+          </ids:system>
+        </ids:classification>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property dataType="IFCBOOLEAN" uri="https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/prop/IsExternal" cardinality="required" instructions="DataType: IFCBOOLEAN">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_RailingCommon</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>IsExternal</ids:simpleValue>
+          </ids:baseName>
+          <ids:value>
+            <ids:simpleValue>true</ids:simpleValue>
+          </ids:value>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2" name="PROPERTY: ticket vending machine is eating my money!" identifier="PROP04" description="https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcElectricAppliance.htm" instructions="Find the Ticket vending machine and add Properties Manufacturer, TicketVendingMachineType, TicketStuckRatio and MoneyStuckRatio.&#xA;Set the ratios as bounds.">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCELECTRICAPPLIANCE</ids:simpleValue>
+          </ids:name>
+          <ids:predefinedType>
+            <ids:simpleValue>VENDINGMACHINE</ids:simpleValue>
+          </ids:predefinedType>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property dataType="IFCLABEL" uri="https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/prop/TicketVendingMachineType" cardinality="required" instructions="DataType: IFCLABEL&#xA;TicketVendingMachineType is a enumerated property, chose the correct one from this list:&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/PEnum_TicketVendingMachineType.htm">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_TicketVendingMachine</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>TicketVendingMachineType</ids:simpleValue>
+          </ids:baseName>
+          <ids:value>
+            <ids:simpleValue>TICKETVENDINGMACHINE</ids:simpleValue>
+          </ids:value>
+        </ids:property>
+        <ids:property dataType="IFCRATIOMEASURE" uri="https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/prop/TicketStuckRatio" cardinality="required" instructions="DataType: IFCRATIOMEASURE&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/Pset_TicketVendingMachine.htm">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_TicketVendingMachine</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>TicketStuckRatio</ids:simpleValue>
+          </ids:baseName>
+          <ids:value>
+            <xs:restriction base="xs:double">
+              <xs:maxExclusive value="10" />
+            </xs:restriction>
+          </ids:value>
+        </ids:property>
+        <ids:property dataType="IFCRATIOMEASURE" uri="https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/prop/MoneyStuckRatio" cardinality="required" instructions="DataType: IFCRATIOMEASURE&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/Pset_TicketVendingMachine.htm">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_TicketVendingMachine</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>MoneyStuckRatio</ids:simpleValue>
+          </ids:baseName>
+          <ids:value>
+            <xs:restriction base="xs:double">
+              <xs:minInclusive value="50" />
+            </xs:restriction>
+          </ids:value>
+        </ids:property>
+        <ids:property dataType="IFCLABEL" uri="https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/prop/Manufacturer" cardinality="required" instructions="DataType: IFCLABEL&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/Pset_ManufacturerTypeInformation.htm">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_ManufacturerTypeInformation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+          <ids:value>
+            <ids:simpleValue>WPS</ids:simpleValue>
+          </ids:value>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="MATERIAL: specific element must have a specific name" identifier="MAT01" description="Validating materials is usually never done like this. But if a tool does not support RegEx, this is a simple test." instructions="Find walls with name '21_metselwerk type 1_100', the Material should be steenachtig_baksteen_steen_roodroze">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+          <ids:predefinedType>
+            <ids:simpleValue>SOLIDWALL</ids:simpleValue>
+          </ids:predefinedType>
+        </ids:entity>
+        <ids:attribute>
+          <ids:name>
+            <ids:simpleValue>Name</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <ids:simpleValue>21_metselwerk type 1_100</ids:simpleValue>
+          </ids:value>
+        </ids:attribute>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:material uri="https://identifier.buildingsmart.org/uri/nkt/naakt/2.4/class/steenachtig_baksteen_steen" cardinality="required">
+          <ids:value>
+            <ids:simpleValue>steenachtig_baksteen_steen_roodroze</ids:simpleValue>
+          </ids:value>
+        </ids:material>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="MATERIAL: brickwork should start with steenachtig_baksteen_steen" identifier="MAT02" description="Usually you need to filter elements and then, the materialname must have a specific syntax ore a specific word in the name. Regular expressions are key in these type of specifications." instructions="Find walls with a name that contains 'metselwerk', the Material should bstart with steenachtig_baksteen_steen">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCWALL</ids:simpleValue>
+          </ids:name>
+          <ids:predefinedType>
+            <ids:simpleValue>SOLIDWALL</ids:simpleValue>
+          </ids:predefinedType>
+        </ids:entity>
+        <ids:attribute>
+          <ids:name>
+            <ids:simpleValue>Name</ids:simpleValue>
+          </ids:name>
+          <ids:value>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*metselwerk.*" />
+            </xs:restriction>
+          </ids:value>
+        </ids:attribute>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:material cardinality="required">
+          <ids:value>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="steenachtig_baksteen_steen.*" />
+            </xs:restriction>
+          </ids:value>
+        </ids:material>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="MATERIAL: a materialname must have a specific property" identifier="MAT03" description="https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/PEnum_AssemblyPlace.htm" instructions="Find elements with a materialname containing 'prefab-element'. They should have the AssemblyPlace property set as FACTORY in Pset_ManufacturerTypeInformation">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:material>
+          <ids:value>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="(beton|gips|hout|ntb|generiek)_.*_prefab-element.*" />
+            </xs:restriction>
+          </ids:value>
+        </ids:material>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property dataType="IFCLABEL" uri="https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4.3/prop/AssemblyPlace" cardinality="required">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_ManufacturerTypeInformation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>AssemblyPlace</ids:simpleValue>
+          </ids:baseName>
+          <ids:value>
+            <ids:simpleValue>FACTORY</ids:simpleValue>
+          </ids:value>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="PARTOF: MEP part of an IfcDistributionsystem" identifier="PO01" instructions="Find some pipes, they must be part of an IfcDistributionSystem">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="IFCPIPEFITTING" />
+              <xs:enumeration value="IFCPIPESEGMENT" />
+            </xs:restriction>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:partOf relation="IFCRELASSIGNSTOGROUP" cardinality="required">
+          <ids:entity>
+            <ids:name>
+              <ids:simpleValue>IFCDISTRIBUTIONSYSTEM</ids:simpleValue>
+            </ids:name>
+            <ids:predefinedType>
+              <ids:simpleValue>DOMESTICCOLDWATER</ids:simpleValue>
+            </ids:predefinedType>
+          </ids:entity>
+        </ids:partOf>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="PARTOF: A smokesensor must be in a space" identifier="PO02" instructions="Find the IfcSensor.SMOKESENSOR that must be contained it a spatial structure, an IfcSpace">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCSENSOR</ids:simpleValue>
+          </ids:name>
+          <ids:predefinedType>
+            <ids:simpleValue>SMOKESENSOR</ids:simpleValue>
+          </ids:predefinedType>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:partOf relation="IFCRELCONTAINEDINSPATIALSTRUCTURE" cardinality="required">
+          <ids:entity>
+            <ids:name>
+              <ids:simpleValue>IFCSPACE</ids:simpleValue>
+            </ids:name>
+          </ids:entity>
+        </ids:partOf>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="PARTOF: A building must be build on a site" identifier="PO03" instructions="Find the IfcBuilding, it should aggregate into an IfcSite">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCBUILDING</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:partOf relation="IFCRELAGGREGATES" cardinality="required">
+          <ids:entity>
+            <ids:name>
+              <ids:simpleValue>IFCSITE</ids:simpleValue>
+            </ids:name>
+          </ids:entity>
+        </ids:partOf>
+      </ids:requirements>
+    </ids:specification>
+  </ids:specifications>
+</ids:ids>
