@@ -124,7 +124,7 @@ The results can be checked on the Bingo scorecard found here: ....</ids:descript
         </ids:attribute>
       </ids:requirements>
     </ids:specification>
-    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="ATTRIBUTE: simple RegEx list of correct naming of building storeys" identifier="ATT05" description="validates the naming of building storeys in a list&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcBuildingStorey.htm" instructions="Add a list of names in the Requirements by use of regular expression">
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="ATTRIBUTE: simple RegEx list of correct naming of building storeys" identifier="ATT05" description="validates the naming of building storeys in with a RegEx pattern.&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcBuildingStorey.htm" instructions="Add a list of names in the Requirements by use of regular expression">
       <ids:applicability minOccurs="1" maxOccurs="unbounded">
         <ids:entity>
           <ids:name>
@@ -145,7 +145,7 @@ The results can be checked on the Bingo scorecard found here: ....</ids:descript
         </ids:attribute>
       </ids:requirements>
     </ids:specification>
-    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="ATTRIBUTE: complex RegEx of correct naming of building storeys" identifier="ATT06" description="validates the naming of building storeys in a list&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcBuildingStorey.htm" instructions="Add a list of names in the Requirements by use of regular expression">
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4 IFC2X3" name="ATTRIBUTE: complex RegEx of correct naming of building storeys" identifier="ATT06" description="validates the naming of building storeys in with a RegEx pattern &#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcBuildingStorey.htm" instructions="Add a list of names in the Requirements by use of regular expression">
       <ids:applicability minOccurs="1" maxOccurs="unbounded">
         <ids:entity>
           <ids:name>
@@ -167,7 +167,7 @@ The results can be checked on the Bingo scorecard found here: ....</ids:descript
       </ids:requirements>
     </ids:specification>
     <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ENTITY: Walls must have allowed Predefined Types" identifier="ENT01" description="These are the Predefined Types. Be aware of not allowed types.&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcWallTypeEnum.htm" instructions="Find Walls and check for all of the Predefined Types that are allowed in the Schema.&#xA;Use the required cardinality: minOccurs=&quot;1&quot; maxOccurs=&quot;unbounded&quot;.">
-      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
         <ids:entity>
           <ids:name>
             <ids:simpleValue>IFCWALL</ids:simpleValue>
@@ -198,7 +198,7 @@ The results can be checked on the Bingo scorecard found here: ....</ids:descript
       </ids:requirements>
     </ids:specification>
     <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ENTITY: Walls may have allowed Predefined Types" identifier="ENT02" description="These are the Predefined Types. Be aware of not allowed types.&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcWallTypeEnum.htm" instructions="Find Walls and check for all of the Predefined Types that are allowed in the Schema.&#xA;Use the optional cardinality: minOccurs=&quot;0,&quot;maxOccurs=&quot;unbounded&quot;.">
-      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
         <ids:entity>
           <ids:name>
             <ids:simpleValue>IFCWALL</ids:simpleValue>
@@ -228,7 +228,7 @@ The results can be checked on the Bingo scorecard found here: ....</ids:descript
         </ids:entity>
       </ids:requirements>
     </ids:specification>
-    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ENTITY: Walls mut not have Predefined Types that are not allowed in Applicability only" identifier="ENT03" description="These are the Predefined Types. Be aware of not allowed types.&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcWallTypeEnum.htm" instructions="Find Walls and check for all of the Predefined Types that are not allowed in the Schema.&#xA;Use the prohibited cardinality: minOccurs=&quot;0&quot; maxOccurs=&quot;0&quot;.&#xA;IDS documentation reads: requirements are ignored in the verification of models for the prohibited cardinality.">
+    <ids:specification ifcVersion="IFC4X3_ADD2 IFC4" name="ENTITY: Walls must not have Predefined Types that are not allowed" identifier="ENT03" description="Walls may not have a Predefined Type that is deprecated.&#xA;https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/HTML/lexical/IfcWallTypeEnum.htm" instructions="Find Walls and check for all of the Predefined Types that are not allowed in the Schema.&#xA;Use the prohibited cardinality: minOccurs=&quot;0&quot; maxOccurs=&quot;0&quot;.&#xA;IDS documentation reads: requirements are ignored in the verification of models for the prohibited cardinality.">
       <ids:applicability minOccurs="0" maxOccurs="0">
         <ids:entity>
           <ids:name>
@@ -356,9 +356,7 @@ The results can be checked on the Bingo scorecard found here: ....</ids:descript
       <ids:applicability minOccurs="1" maxOccurs="unbounded">
         <ids:property dataType="IFCBOOLEAN">
           <ids:propertySet>
-            <xs:restriction base="xs:string">
-              <xs:pattern value="Pset_WallCommon" />
-            </xs:restriction>
+            <ids:simpleValue>Pset_WallCommon</ids:simpleValue>
           </ids:propertySet>
           <ids:baseName>
             <ids:simpleValue>IsExternal</ids:simpleValue>
@@ -605,6 +603,24 @@ The results can be checked on the Bingo scorecard found here: ....</ids:descript
           <ids:entity>
             <ids:name>
               <ids:simpleValue>IFCSITE</ids:simpleValue>
+            </ids:name>
+          </ids:entity>
+        </ids:partOf>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification ifcVersion="IFC4X3_ADD2" name="PART OF: Door fills wall" identifier="PO04" instructions="A door fills an opening that voids a wall.">
+      <ids:applicability minOccurs="1" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCDOOR</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:partOf relation="IFCRELVOIDSELEMENT IFCRELFILLSELEMENT" cardinality="required">
+          <ids:entity>
+            <ids:name>
+              <ids:simpleValue>IFCWALL</ids:simpleValue>
             </ids:name>
           </ids:entity>
         </ids:partOf>
